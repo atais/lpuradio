@@ -1,23 +1,20 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from 'react-native';
-import TrackPlayer from 'react-native-track-player';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import TrackPlayer, { usePlaybackState } from 'react-native-track-player';
 
-const start = async () => {
+async function start() {
+
   // Set up the player
-  await TrackPlayer.setupPlayer();
+  await TrackPlayer.setupPlayer({});
   await TrackPlayer.updateOptions({
-    stopWithApp: true,
+    stopWithApp: false,
+    waitForBuffer: true,
     capabilities: [
-      TrackPlayer.CAPABILITY_PLAY,
-      TrackPlayer.CAPABILITY_PAUSE,
-      TrackPlayer.CAPABILITY_STOP
-    ],
-    compactCapabilities: [
       TrackPlayer.CAPABILITY_PLAY,
       TrackPlayer.CAPABILITY_PAUSE
     ]
   });
-  
+
   // Add a track to the queue
   await TrackPlayer.add({
       id: 'trackId',
@@ -33,14 +30,28 @@ const start = async () => {
 
 
 export default function App() {
- 
+  const playbackState = usePlaybackState();
+
   useEffect(() => {
     start();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>LPU RADIO APP</Text>
+      <Text>{ playbackState }</Text>
+
+      { playbackState !== TrackPlayer.STATE_PLAYING && 
+        <Button onPress={() => TrackPlayer.play()}
+              title="Play" 
+              color="#841584" 
+              accessibilityLabel="Play" /> }
+
+      { playbackState !== TrackPlayer.STATE_PAUSED && 
+       <Button onPress={() => TrackPlayer.pause()} 
+              title="Pause" 
+              color="#841333" 
+              accessibilityLabel="Pause" /> }
     </View>
   );
 }
@@ -52,4 +63,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  hidden: {
+    width: 0,
+    height: 0,
+  }
 });

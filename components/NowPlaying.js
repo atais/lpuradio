@@ -1,7 +1,8 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, View} from "react-native";
 
-export default function NowPlaying() {
+export default function NowPlaying(props) {
+
   return (
     <View style={styles.contanier}>
       <View style={styles.mainbar}>
@@ -11,15 +12,16 @@ export default function NowPlaying() {
       </View>
       <View style={styles.music_logo_view}>
         <Image
-          source={require('../assets/logo.png')}
+          source={props.rds.teraz.okladka}
           style={styles.image_view}
         />
       </View>
-
       <View style={styles.name_of_song_View}>
-        <Text style={styles.name_of_song_Text1}>#02 - Practice</Text>
+        <Text style={styles.name_of_song_Text1}>
+          {props.rds.teraz.tytul}
+        </Text>
         <Text style={styles.name_of_song_Text2}>
-          Digital Marketing - By Setup Cast
+          {props.rds.teraz.wykonawca}
         </Text>
       </View>
     </View>

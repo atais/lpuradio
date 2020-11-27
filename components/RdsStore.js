@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import TrackPlayer from 'react-native-track-player';
+import NowPlaying from "./NowPlaying";
 
 export function RdsStore() {
   const [rds, setRds] = useState(emptyContext);
@@ -49,7 +50,7 @@ export function RdsStore() {
       })
   }
 
-  return null;
+  return (<NowPlaying rds={rds}/>);
 }
 
 const defaultCover = require('../assets/defaultCover.jpg');

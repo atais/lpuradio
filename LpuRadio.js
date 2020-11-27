@@ -4,7 +4,6 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import ProgressCircle from 'react-native-progress-circle'
 import PlayerControls from "./components/PlayerControls";
 import {initializePlayer} from "./components/GlobalPlayer";
-import NowPlaying from "./components/NowPlaying";
 import {RdsStore} from "./components/RdsStore";
 
 export default function App() {
@@ -16,7 +15,6 @@ export default function App() {
     <SafeAreaView style={styles.contanier}>
 
       <RdsStore/>
-      <NowPlaying/>
       <PlayerControls/>
 
       <View style={styles.recently_played_view}>

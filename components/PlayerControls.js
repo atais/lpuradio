@@ -19,10 +19,8 @@ const lpuColor = '#7dbf13';
 const styles = StyleSheet.create({
   functions_view: {
     flexDirection: 'row',
-    height: '10%',
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 const playButtonView =

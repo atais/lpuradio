@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import BackupApp from './App';
+import App from './LpuRadio';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => BackupApp);
+AppRegistry.registerComponent(appName, () => App);

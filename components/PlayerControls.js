@@ -1,50 +1,68 @@
-import React, {Component} from 'react';
-import TrackPlayer from 'react-native-track-player';
-import {Button, Text, View} from 'react-native';
+import React from 'react';
+import TrackPlayer, {usePlaybackState} from 'react-native-track-player';
+import {StyleSheet, View} from 'react-native';
+import IoniIcons from "react-native-vector-icons/Ionicons";
 
-class PlayerControls extends Component {
-  constructor(props) {
-    super(props);
-    this.props = props;
+export default function PlayerControls() {
+  const state = usePlaybackState();
+  if (state !== TrackPlayer.STATE_PLAYING) {
+    return playButtonView;
+  } else if (state !== TrackPlayer.STATE_PAUSED) {
+    return pauseButtonView;
+  } else {
+    return emptyView;
   }
-
-  render() {
-    let state = this.props.state;
-    if (state !== TrackPlayer.STATE_PLAYING) {
-      return (
-        <View>
-          <Text>{state}</Text>
-          <Button
-            onPress={() => TrackPlayer.play()}
-            title="Play"
-            color="#841584"
-            accessibilityLabel="Play"
-          />
-        </View>
-      );
-    } else if (state !== TrackPlayer.STATE_PAUSED) {
-      return (
-        <View>
-          <Text>{state}</Text>
-          <Button
-            onPress={() => TrackPlayer.stop()}
-            title="Stop"
-            color="#841333"
-            accessibilityLabel="Stop"
-          />
-          <Button
-            onPress={() => TrackPlayer.pause()}
-            title="Pause"
-            color="#841333"
-            accessibilityLabel="Pause"
-          />
-        </View>
-      );
-    } else {
-      return <View></View>;
-    }
-  }
-
 }
 
-export default PlayerControls;
+const transparent = 'transparent'
+const lpuColor = '#7dbf13';
+const styles = StyleSheet.create({
+  functions_view: {
+    flexDirection: 'row',
+    height: '10%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+const playButtonView =
+  <View style={styles.functions_view}>
+    <IoniIcons.Button
+      name="play-circle-outline"
+      onPress={() => TrackPlayer.play()}
+      size={70}
+      backgroundColor={transparent}
+      underlayColor={transparent}
+      color={lpuColor}
+    />
+    <IoniIcons.Button
+      name="stop-circle-outline"
+      onPress={() => TrackPlayer.stop()}
+      backgroundColor={transparent}
+      underlayColor={transparent}
+      size={70}
+      color={lpuColor}
+    />
+  </View>
+
+const pauseButtonView =
+  <View style={styles.functions_view}>
+    <IoniIcons.Button
+      name="pause-circle-outline"
+      onPress={() => TrackPlayer.pause()}
+      backgroundColor={transparent}
+      underlayColor={transparent}
+      size={70}
+      color={lpuColor}
+    />
+    <IoniIcons.Button
+      name="stop-circle-outline"
+      onPress={() => TrackPlayer.stop()}
+      backgroundColor={transparent}
+      underlayColor={transparent}
+      size={70}
+      color={lpuColor}
+    />
+  </View>
+
+const emptyView = <View/>

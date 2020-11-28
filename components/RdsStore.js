@@ -14,11 +14,13 @@ export function RdsStore() {
     console.log(rds);
     TrackPlayer.getCurrentTrack().then((track) => {
       if (track !== undefined) {
-        TrackPlayer.updateMetadataForTrack(track, {
+        return TrackPlayer.updateMetadataForTrack(track, {
           title: teraz.tytul,
           artist: teraz.wykonawca,
           artwork: teraz.okladka,
         });
+      } else {
+        return Promise.resolve();
       }
     });
   }

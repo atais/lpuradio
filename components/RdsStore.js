@@ -26,21 +26,21 @@ export function RdsStore() {
   }
 
   async function tick() {
-    await fetch('http://lpuradio.pl/rds/rds.json')
+    await fetch('https://lpuradio.pl/rds/rds.json')
       .then((r) => r.json())
       .then(
         (res) => {
-          if (res.teraz.okladka === undefined || !res.teraz.okladka.includes('http')) {
-            let generic = res;
-            generic.teraz.okladka = defaultCover;
-            return generic;
-          } else {
-            let updated = res;
-            // todo: necessary for ios
-            // let withHttps = res.teraz.okladka.replace('http://', 'https://');
-            updated.teraz.okladka = {uri: res.teraz.okladka};
-            return updated;
-          }
+          // if (res.teraz.okladka === undefined || !res.teraz.okladka.includes('http')) {
+          let generic = res;
+          generic.teraz.okladka = defaultCover;
+          return generic;
+          // } else {
+          //   let updated = res;
+          //   todo: necessary for ios
+          //   let withHttps = res.teraz.okladka.replace('http://', 'https://');
+          // updated.teraz.okladka = {uri: res.teraz.okladka};
+          // return updated;
+          // }
         },
         (error) => {
           console.log('error updating rds: ' + error);

@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from "react-native";
 import {textColor} from "./Const";
-import {useStateValue} from "./GlobalState";
-import {emptyRds} from "./RdsService";
+import {emptyRds, useStateValue} from "./GlobalState";
 const equal = require('fast-deep-equal/react');
 
 export default function RecentlyPlayed() {

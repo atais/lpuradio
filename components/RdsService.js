@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useStateValue} from "./GlobalState";
+import {emptyRds, useStateValue} from "./GlobalState";
 
 export function RdsService() {
 
@@ -36,10 +36,4 @@ export function RdsService() {
   }
 
   return null;
-}
-
-export const emptyRds = {
-  title: '',
-  artist: '',
-  // artwork: cover
 }

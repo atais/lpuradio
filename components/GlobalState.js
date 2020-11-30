@@ -1,6 +1,5 @@
 import React, {createContext, useContext, useReducer} from 'react';
 import {updateTrackPlayer} from "./GlobalPlayer";
-import {emptyRds} from "./RdsService";
 
 export const StateContext = createContext();
 
@@ -12,6 +11,11 @@ export const StateProvider = ({reducer, initialState, children}) => (
 
 export const useStateValue = () => useContext(StateContext);
 
+export const emptyRds = {
+  title: '',
+  artist: '',
+  // artwork: cover
+}
 
 export const initialState = {
   theme: {primary: 'green'},

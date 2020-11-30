@@ -3,13 +3,18 @@ import React from "react";
 import Image from 'react-native-scalable-image';
 import {Dev_Width} from "./Const";
 
-export default function Logo() {
+export default function TopBar() {
 
   return (
-    <View style={styles.contanier}>
+    <View style={styles.container}>
       <Image
         width={Dev_Width * 0.3}
-        source={require('../assets/logo.png')}
+        source={require('../assets/lpuradio.png')}
+        style={styles.logo}
+      />
+      <Image
+        width={Dev_Width * 0.3}
+        source={require('../assets/lpu24.png')}
         style={styles.logo}
       />
     </View>
@@ -17,7 +22,8 @@ export default function Logo() {
 }
 
 const styles = StyleSheet.create({
-  contanier: {
+  container: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });

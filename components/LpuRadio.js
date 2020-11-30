@@ -3,7 +3,7 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import PlayerControls from "./PlayerControls";
 import {initializePlayer} from "./GlobalPlayer";
 import {initialState, reducer, StateProvider} from "./GlobalState";
-import Logo from "./Logo";
+import TopBar from "./TopBar";
 import {bgColor, Dev_Height, Dev_Width} from "./Const";
 import {RdsService} from "./RdsService";
 import NowPlaying from "./NowPlaying";
@@ -16,9 +16,9 @@ export default function App() {
 
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
-      <SafeAreaView style={styles.contanier}>
+      <SafeAreaView style={styles.container}>
         <RdsService/>
-        <Logo/>
+        <TopBar/>
         <View>
           <PlayerControls/>
           <NowPlaying/>
@@ -30,7 +30,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  contanier: {
+  container: {
     height: Dev_Height,
     width: Dev_Width,
     flex: 1,

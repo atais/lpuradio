@@ -9,7 +9,7 @@ export default function NowPlaying() {
   const [{rds}, dispatch] = useStateValue();
 
   return (
-    <View style={styles.contanier}>
+    <View style={styles.container}>
       <TextTicker
         bounce
         bounceSpeed={150}
@@ -22,7 +22,7 @@ export default function NowPlaying() {
 }
 
 const styles = StyleSheet.create({
-  contanier: {
+  container: {
     flexDirection: 'row',
     justifyContent: 'center',
   },

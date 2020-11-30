@@ -20,8 +20,8 @@ export async function initializePlayer() {
     id: GLOBAL_TRACK_ID,
     url: 'http://radia2.inten.pl:8984/stream.mp3',
     title: 'LPU Radio',
-    artist: 'Track Artist',
-    artwork: 'https://i.picsum.photos/id/500/200/200.jpg',
+    artist: 'LPU Radio',
+    // artwork: '', fixme: implement covers
   });
 
   // Start playing it

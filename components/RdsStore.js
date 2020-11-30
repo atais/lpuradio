@@ -10,14 +10,14 @@ export function RdsStore() {
     setInterval(() => tick(), 10000);
   }, []);
 
-  async function updateTrackPlayer(teraz) {
+  async function updateTrackPlayer(rds) {
     console.log(rds);
     TrackPlayer.getCurrentTrack().then((track) => {
       if (track !== undefined) {
         return TrackPlayer.updateMetadataForTrack(track, {
-          title: teraz.tytul,
-          artist: teraz.wykonawca,
-          artwork: teraz.okladka,
+          title: rds.title,
+          artist: rds.artist,
+          // artwork: cover
         });
       } else {
         return Promise.resolve();
@@ -30,17 +30,12 @@ export function RdsStore() {
       .then((r) => r.json())
       .then(
         (res) => {
-          // if (res.teraz.okladka === undefined || !res.teraz.okladka.includes('http')) {
-          let generic = res;
-          generic.teraz.okladka = defaultCover;
-          return generic;
-          // } else {
-          //   let updated = res;
-          //   todo: necessary for ios
-          //   let withHttps = res.teraz.okladka.replace('http://', 'https://');
-          // updated.teraz.okladka = {uri: res.teraz.okladka};
-          // return updated;
-          // }
+          return {
+            title: res.teraz.tytul,
+            artist: res.teraz.wykonawca,
+            // todo: https is necessary
+            // cover = {uri: res.teraz.okladka};
+          };
         },
         (error) => {
           console.log('error updating rds: ' + error);
@@ -48,20 +43,14 @@ export function RdsStore() {
         },
       )
       .then((s) => {
-        setRds(s, updateTrackPlayer(s.teraz))
+        setRds(s, updateTrackPlayer(s))
       })
   }
 
   return (<NowPlaying rds={rds}/>);
 }
 
-const defaultCover = require('../assets/defaultCover.jpg');
 const emptyContext = {
-  poprzednio: {tytul: '', wykonawca: ''},
-  teraz: {
-    tytul: '',
-    wykonawca: '',
-    okladka: defaultCover,
-  },
-  zaraz: {tytul: '', wykonawca: ''},
+  tytul: '',
+  wykonawca: '',
 };

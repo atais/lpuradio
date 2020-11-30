@@ -17,50 +17,46 @@ export default function PlayerControls() {
 const transparent = 'transparent'
 const lpuColor = '#7dbf13';
 const styles = StyleSheet.create({
-  functions_view: {
+  container: {
     flexDirection: 'row',
-    width: '100%',
     justifyContent: 'center',
   },
 });
+
+const stopButton =
+  <IoniIcons.Button
+    name="stop-circle-outline"
+    onPress={() => TrackPlayer.stop()}
+    backgroundColor={transparent}
+    underlayColor={transparent}
+    size={70}
+    color={lpuColor}
+  />
+
 const playButtonView =
-  <View style={styles.functions_view}>
+  <View style={styles.container}>
     <IoniIcons.Button
       name="play-circle-outline"
       onPress={() => TrackPlayer.play()}
-      size={70}
+      size={250}
       backgroundColor={transparent}
       underlayColor={transparent}
       color={lpuColor}
     />
-    <IoniIcons.Button
-      name="stop-circle-outline"
-      onPress={() => TrackPlayer.stop()}
-      backgroundColor={transparent}
-      underlayColor={transparent}
-      size={70}
-      color={lpuColor}
-    />
+    {stopButton}
   </View>
 
 const pauseButtonView =
-  <View style={styles.functions_view}>
+  <View style={styles.container}>
     <IoniIcons.Button
       name="pause-circle-outline"
       onPress={() => TrackPlayer.pause()}
       backgroundColor={transparent}
       underlayColor={transparent}
-      size={70}
+      size={250}
       color={lpuColor}
     />
-    <IoniIcons.Button
-      name="stop-circle-outline"
-      onPress={() => TrackPlayer.stop()}
-      backgroundColor={transparent}
-      underlayColor={transparent}
-      size={70}
-      color={lpuColor}
-    />
+    {stopButton}
   </View>
 
 const emptyView = <View/>

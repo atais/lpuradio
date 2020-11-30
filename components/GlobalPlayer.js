@@ -6,7 +6,7 @@ export async function initializePlayer() {
   // Set up the player
   await TrackPlayer.setupPlayer({});
   await TrackPlayer.updateOptions({
-    stopWithApp: false,
+    stopWithApp: true,
     waitForBuffer: true,
     capabilities: [
       TrackPlayer.CAPABILITY_PLAY,

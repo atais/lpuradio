@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignContent: 'space-between',
     justifyContent: 'space-between',
-    backgroundColor: bgColor
+    backgroundColor: bgColor,
+    padding: 20
   }
 });

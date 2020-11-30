@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
   contanier: {
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingLeft: 20,
-    paddingTop: 20,
   },
   text: {
     fontSize: 19,

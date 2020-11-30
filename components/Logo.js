@@ -18,8 +18,6 @@ export default function Logo() {
 
 const styles = StyleSheet.create({
   contanier: {
-    paddingLeft: 20,
-    paddingTop: 20,
     flexDirection: 'row',
   },
 });

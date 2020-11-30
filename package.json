@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "fast-deep-equal": "^3.1.3",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-scalable-image": "^1.0.0",

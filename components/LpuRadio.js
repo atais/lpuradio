@@ -5,7 +5,7 @@ import {initializePlayer} from "./GlobalPlayer";
 import {initialState, reducer, StateProvider} from "./GlobalState";
 import Logo from "./Logo";
 import {bgColor, Dev_Height, Dev_Width} from "./Const";
-import {RdsStore} from "./RdsStore";
+import {RdsService} from "./RdsService";
 import NowPlaying from "./NowPlaying";
 import RecentlyPlayed from "./RecentyPlayed";
 
@@ -17,7 +17,7 @@ export default function App() {
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
       <SafeAreaView style={styles.contanier}>
-        <RdsStore/>
+        <RdsService/>
         <Logo/>
         <View>
           <PlayerControls/>

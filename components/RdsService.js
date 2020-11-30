@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useStateValue} from "./GlobalState";
 
-export function RdsStore() {
+export function RdsService() {
 
   const [{rds}, dispatch] = useStateValue();
 
@@ -9,7 +9,6 @@ export function RdsStore() {
     tick();
     setInterval(() => tick(), 10000);
   }, []);
-
 
   async function tick() {
     await fetch('https://lpuradio.pl/rds/rds.json')
@@ -25,13 +24,7 @@ export function RdsStore() {
         },
         (error) => {
           console.log('error updating rds: ' + error);
-          dispatch({
-            type: 'updateRds',
-            updated: {
-              title: '',
-              artist: '',
-            }
-          });
+          return emptyRds;
         },
       )
       .then((s) => {
@@ -43,4 +36,10 @@ export function RdsStore() {
   }
 
   return null;
+}
+
+export const emptyRds = {
+  title: '',
+  artist: '',
+  // artwork: cover
 }

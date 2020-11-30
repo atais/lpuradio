@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useReducer} from 'react';
 import {updateTrackPlayer} from "./GlobalPlayer";
+import {emptyRds} from "./RdsService";
 
 export const StateContext = createContext();
 
@@ -14,11 +15,7 @@ export const useStateValue = () => useContext(StateContext);
 
 export const initialState = {
   theme: {primary: 'green'},
-  rds: {
-    title: '',
-    artist: '',
-    // artwork: cover
-  },
+  rds: emptyRds,
 };
 
 export const reducer = (state, action) => {

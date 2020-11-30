@@ -1,29 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import TrackPlayer from 'react-native-track-player';
-import NowPlaying from "./NowPlaying";
+import React, {useEffect} from 'react';
+import {useStateValue} from "./GlobalState";
 
 export function RdsStore() {
-  const [rds, setRds] = useState(emptyContext);
+
+  const [{rds}, dispatch] = useStateValue();
 
   useEffect(() => {
     tick();
     setInterval(() => tick(), 10000);
   }, []);
 
-  async function updateTrackPlayer(rds) {
-    console.log(rds);
-    TrackPlayer.getCurrentTrack().then((track) => {
-      if (track !== undefined) {
-        return TrackPlayer.updateMetadataForTrack(track, {
-          title: rds.title,
-          artist: rds.artist,
-          // artwork: cover
-        });
-      } else {
-        return Promise.resolve();
-      }
-    });
-  }
 
   async function tick() {
     await fetch('https://lpuradio.pl/rds/rds.json')
@@ -39,18 +25,22 @@ export function RdsStore() {
         },
         (error) => {
           console.log('error updating rds: ' + error);
-          setRds(emptyContext);
+          dispatch({
+            type: 'updateRds',
+            updated: {
+              title: '',
+              artist: '',
+            }
+          });
         },
       )
       .then((s) => {
-        setRds(s, updateTrackPlayer(s))
+        dispatch({
+          type: 'updateRds',
+          updated: s
+        })
       })
   }
 
-  return (<NowPlaying rds={rds}/>);
+  return null;
 }
-
-const emptyContext = {
-  tytul: '',
-  wykonawca: '',
-};

@@ -28,3 +28,19 @@ export async function initializePlayer() {
   // await TrackPlayer.play();
   await TrackPlayer.pause();
 }
+
+export async function updateTrackPlayer(rds) {
+  await TrackPlayer.getCurrentTrack().then((track) => {
+    if (track !== undefined) {
+      return TrackPlayer.updateMetadataForTrack(track, {
+        title: rds.title,
+        artist: rds.artist,
+        // artwork: cover
+      });
+    } else {
+      return Promise.resolve();
+    }
+  });
+}
+
+

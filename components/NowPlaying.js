@@ -1,38 +1,36 @@
 import React from 'react';
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, View} from "react-native";
+import {useStateValue} from "./GlobalState";
+import {textColor} from "./Const";
+import TextTicker from 'react-native-text-ticker'
 
-export default function NowPlaying(props) {
+export default function NowPlaying() {
+
+  const [{rds}, dispatch] = useStateValue();
 
   return (
     <View style={styles.contanier}>
-        <View style={styles.mainbar}>
-          <Text style={styles.now_playing_text}>
-            Poprzednio otworzone...
-          </Text>
-        </View>
-        <Text style={styles.name_of_song_Text1}>
-          {props.rds.title}
-        </Text>
-        <Text style={styles.name_of_song_Text2}>
-          {props.rds.artist}
-        </Text>
+      <TextTicker
+        bounce
+        bounceSpeed={150}
+        repeatSpacer={200}
+        style={styles.text}>
+        {rds.artist} - {rds.title}
+      </TextTicker>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   contanier: {
-    flexDirection: 'column',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingLeft: 20,
+    paddingTop: 20,
   },
-  queue_text: {
-    fontSize: 19,
-  },
-  name_of_song_Text1: {
+  text: {
     fontSize: 19,
     fontWeight: '500',
-  },
-  name_of_song_Text2: {
-    color: '#808080',
-    marginTop: '4%',
+    color: textColor,
   },
 });

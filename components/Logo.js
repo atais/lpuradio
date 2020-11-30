@@ -1,4 +1,4 @@
-import {View, StyleSheet} from "react-native";
+import {StyleSheet, View} from "react-native";
 import React from "react";
 import Image from 'react-native-scalable-image';
 import {Dev_Width} from "./Const";

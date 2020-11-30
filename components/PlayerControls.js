@@ -2,6 +2,7 @@ import React from 'react';
 import TrackPlayer, {usePlaybackState} from 'react-native-track-player';
 import {StyleSheet, View} from 'react-native';
 import IoniIcons from "react-native-vector-icons/Ionicons";
+import {lpuColor} from "./Const";
 
 export default function PlayerControls() {
   const state = usePlaybackState();
@@ -15,8 +16,13 @@ export default function PlayerControls() {
 }
 
 const transparent = 'transparent'
-const lpuColor = '#7dbf13';
 const styles = StyleSheet.create({
+  main: {},
+  stop: {
+    position: "absolute",
+    top: 168,
+    left: 290,
+  },
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -33,30 +39,46 @@ const stopButton =
     color={lpuColor}
   />
 
+const playButton =
+  <IoniIcons.Button
+    name="play-circle-outline"
+    onPress={() => TrackPlayer.play()}
+    size={250}
+    backgroundColor={transparent}
+    underlayColor={transparent}
+    color={lpuColor}
+  />
+
+const pauseButton =
+  <IoniIcons.Button
+    name="pause-circle-outline"
+    onPress={() => TrackPlayer.pause()}
+    backgroundColor={transparent}
+    underlayColor={transparent}
+    size={250}
+    color={lpuColor}
+  />
+
+
 const playButtonView =
-  <View style={styles.container}>
-    <IoniIcons.Button
-      name="play-circle-outline"
-      onPress={() => TrackPlayer.play()}
-      size={250}
-      backgroundColor={transparent}
-      underlayColor={transparent}
-      color={lpuColor}
-    />
-    {stopButton}
+  <View style={styles.main}>
+    <View style={styles.container}>
+      {playButton}
+    </View>
+    <View style={styles.stop}>
+      {stopButton}
+    </View>
   </View>
 
 const pauseButtonView =
-  <View style={styles.container}>
-    <IoniIcons.Button
-      name="pause-circle-outline"
-      onPress={() => TrackPlayer.pause()}
-      backgroundColor={transparent}
-      underlayColor={transparent}
-      size={250}
-      color={lpuColor}
-    />
-    {stopButton}
+  <View style={styles.main}>
+    <View style={styles.container}>
+      {pauseButton}
+    </View>
+    <View style={styles.stop}>
+      {stopButton}
+    </View>
   </View>
 
-const emptyView = <View/>
+const emptyView = <View style={styles.main}/>
+

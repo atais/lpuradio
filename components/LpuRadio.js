@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import PlayerControls from "./components/PlayerControls";
-import {initializePlayer} from "./components/GlobalPlayer";
-import {initialState, reducer, StateProvider} from "./components/GlobalState";
-import Logo from "./components/Logo";
-import {Dev_Height, Dev_Width} from "./components/Const";
-import {RdsStore} from "./components/RdsStore";
+import PlayerControls from "./PlayerControls";
+import {initializePlayer} from "./GlobalPlayer";
+import {initialState, reducer, StateProvider} from "./GlobalState";
+import Logo from "./Logo";
+import {bgColor, Dev_Height, Dev_Width} from "./Const";
+import {RdsStore} from "./RdsStore";
+import NowPlaying from "./NowPlaying";
+import RecentlyPlayed from "./RecentyPlayed";
 
 export default function App() {
   useEffect(() => {
@@ -14,15 +16,14 @@ export default function App() {
 
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
-
       <SafeAreaView style={styles.contanier}>
-        <Logo/>
-
-
-        <PlayerControls/>
         <RdsStore/>
-
-        <View/>
+        <Logo/>
+        <View>
+          <PlayerControls/>
+          <NowPlaying/>
+        </View>
+        <RecentlyPlayed/>
       </SafeAreaView>
     </StateProvider>
   );
@@ -36,5 +37,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignContent: 'space-between',
     justifyContent: 'space-between',
+    backgroundColor: bgColor
   }
 });

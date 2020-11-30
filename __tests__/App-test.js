@@ -4,7 +4,7 @@
 
 import 'react-native';
 import React from 'react';
-import BackupApp from '../LpuRadio';
+import BackupApp from '../components/LpuRadio';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';

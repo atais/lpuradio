@@ -4,6 +4,7 @@ This project is based on:
 - [Music Player UI React Native](https://github.com/Belgin-Android/Music-Player-UI-React-Native)
 - [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
 - [React Native Tab View](https://github.com/satya164/react-native-tab-view)
+- [React Native Text Ticker](https://github.com/deanhet/react-native-text-ticker)
 
 ## Development
 To develop this project you should to set up your local environment following by [React Native Official guide](https://reactnative.dev/docs/environment-setup).

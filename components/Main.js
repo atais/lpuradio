@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet, View} from 'react-native';
 import {SceneMap, TabView} from 'react-native-tab-view';
 import LpuRadio from "./LpuRadio";
 import {initializePlayer} from "./GlobalPlayer";
-import TopBar from "./TopBar";
+import {TopBar} from "./TopBar";
 
 const SecondRoute = () => (
   <View style={[styles.scene, {backgroundColor: '#673ab7'}]}/>

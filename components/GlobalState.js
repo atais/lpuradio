@@ -30,7 +30,7 @@ export const reducer = (state, action) => {
         theme: action.newTheme
       };
     case 'updateRds':
-      updateTrackPlayer(action.updated);
+      updateTrackPlayer(action.updated)
       return {
         ...state,
         rds: action.updated

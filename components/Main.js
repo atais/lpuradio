@@ -1,31 +1,28 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Dimensions, StyleSheet, View} from 'react-native';
 import {SceneMap, TabView} from 'react-native-tab-view';
-import LpuRadio from "./LpuRadio";
 import {initializePlayer} from "./GlobalPlayer";
 import {TopBar} from "./TopBar";
-
-const SecondRoute = () => (
-  <View style={[styles.scene, {backgroundColor: '#673ab7'}]}/>
-);
+import LpuRadio from "./LpuRadio";
+import RssReader from "./RssReader";
 
 const initialLayout = {width: Dimensions.get('window').width};
 
 export default function App() {
 
-  React.useEffect(() => {
+  useEffect(() => {
     initializePlayer();
   }, []);
 
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
     {key: 'radio', title: 'Radio'},
     {key: 'news', title: 'News'},
   ]);
 
   const renderScene = SceneMap({
     radio: LpuRadio,
-    news: SecondRoute,
+    news: RssReader,
   });
 
   return (

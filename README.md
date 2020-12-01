@@ -1,6 +1,6 @@
 # LPU Radio
 This project is based on:
-- [React Native Track Player](https://react-native-track-player.js.org/)
+- [React Native Track Player](https://github.com/react-native-kit/react-native-track-player)
 - [Music Player UI React Native](https://github.com/Belgin-Android/Music-Player-UI-React-Native)
 - [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
 - [React Native Tab View](https://github.com/satya164/react-native-tab-view)

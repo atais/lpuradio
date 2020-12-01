@@ -9,6 +9,7 @@ export const TopBar = props => (
   <TabBar
     {...props}
     style={{backgroundColor: bgColor}}
+    indicatorStyle={{backgroundColor: lpuColor}}
     renderLabel={({route, focused, color}) => null}
     renderIcon={({route, focused, color}) => {
       if (route.key === 'radio') {

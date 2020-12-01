@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   stop: {
     position: "absolute",
     top: 168,
-    left: 290,
+    left: 250,
   },
   container: {
     flexDirection: 'row',

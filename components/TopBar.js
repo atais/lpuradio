@@ -1,4 +1,4 @@
-import {StyleSheet, View} from "react-native";
+import {StyleSheet} from "react-native";
 import React from "react";
 import Image from 'react-native-scalable-image';
 import {bgColor, Dev_Width, lpuColor} from "./Const";

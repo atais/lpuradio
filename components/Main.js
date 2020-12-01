@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <TabView
-      renderTabBar={TopBar} // todo: which is nicer?
+      renderTabBar={TopBar}
       navigationState={{index, routes}}
       renderScene={renderScene}
       onIndexChange={setIndex}
@@ -35,9 +35,3 @@ export default function App() {
     />
   );
 }
-
-const styles = StyleSheet.create({
-  scene: {
-    flex: 1,
-  },
-});

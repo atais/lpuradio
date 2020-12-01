@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View, Text} from "react-native";
+import {SafeAreaView, ScrollView, StyleSheet, View, Text, RefreshControl} from "react-native";
 import {bgColor, Dev_Height, Dev_Width, textColor} from "./Const";
 import * as rssParser from 'react-native-rss-parser';
 
 export default function RssReader(props) {
 
   const [news, setNews] = useState([]);
+  const [refreshing, setRefreshing] = React.useState(false);
 
-  function fetchNews() {
-    fetch('https://lpu24.pl/feed/')
+  async function fetchNews() {
+    setRefreshing(true);
+    await fetch('https://lpu24.pl/feed/')
       .then((response) => response.text())
       .then((responseData) => rssParser.parse(responseData))
       .then((rss) => {
-        setNews(rss.items)
-      });
+        setNews(rss.items);
+        return setRefreshing(false);
+      })
   }
 
   useEffect(() => {
@@ -22,10 +25,15 @@ export default function RssReader(props) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView}
+                  horizontal={false}
+                  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={fetchNews}/>}>
         {
           news.map(el => (
             <View key={el.id}>
+              <Text style={styles.title}>
+                {el.title}
+              </Text>
               <Text style={styles.desc}>
                 {el.description}
               </Text>
@@ -47,9 +55,18 @@ const styles = StyleSheet.create({
     alignContent: 'space-between',
     justifyContent: 'space-between',
     backgroundColor: bgColor,
-    padding: 20
+    paddingTop: 10,
+    paddingLeft: 5,
+    paddingRight: 5,
+    paddingBottom: 5,
+  },
+  title: {
+    color: textColor,
+    fontSize: 19,
+    fontWeight: '500',
   },
   desc: {
+    textAlign: 'justify',
     color: textColor,
     marginBottom: 10,
   }

@@ -17,15 +17,13 @@ export default function PlayerControls() {
 
 const transparent = 'transparent'
 const styles = StyleSheet.create({
-  main: {},
-  stop: {
-    position: "absolute",
-    top: 168,
-    left: 250,
+  main: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   container: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
 });
 
@@ -37,6 +35,15 @@ const stopButton =
     underlayColor={transparent}
     size={70}
     color={lpuColor}
+  />
+
+const stopButtonBalancer =
+  <IoniIcons.Button
+    name="stop-circle-outline"
+    backgroundColor={transparent}
+    underlayColor={transparent}
+    size={70}
+    color={transparent}
   />
 
 const playButton =
@@ -63,9 +70,8 @@ const pauseButton =
 const playButtonView =
   <View style={styles.main}>
     <View style={styles.container}>
+      {stopButtonBalancer}
       {playButton}
-    </View>
-    <View style={styles.stop}>
       {stopButton}
     </View>
   </View>
@@ -73,9 +79,8 @@ const playButtonView =
 const pauseButtonView =
   <View style={styles.main}>
     <View style={styles.container}>
+      {stopButtonBalancer}
       {pauseButton}
-    </View>
-    <View style={styles.stop}>
       {stopButton}
     </View>
   </View>

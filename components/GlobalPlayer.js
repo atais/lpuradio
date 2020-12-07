@@ -18,7 +18,7 @@ export async function initializePlayer() {
   // Add a track to the queue
   await TrackPlayer.add({
     id: GLOBAL_TRACK_ID,
-    url: 'http://radia2.inten.pl:8984/stream.mp3',
+    url: 'https://icecast.lpuradio.pl/stream.mp3',
     title: 'LPU Radio',
     artist: 'LPU Radio',
     // artwork: '', fixme: implement covers

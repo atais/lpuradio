@@ -11,9 +11,10 @@ export default function NowPlaying() {
   return (
     <View style={styles.container}>
       <TextTicker
+        duration={10000}
         bounce
-        bounceSpeed={200}
-        repeatSpacer={200}
+        repeatSpacer={50}
+        scroll={false}
         style={styles.text}>
         {rds.artist} - {rds.title}
       </TextTicker>

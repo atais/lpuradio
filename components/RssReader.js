@@ -9,9 +9,10 @@ import {
   TouchableHighlight,
   View
 } from "react-native";
-import {bgColor, bgLighter, Dev_Height, Dev_Width, textColor} from "./Const";
+import {bgColor, bgLighter, Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
 import * as rssParser from 'react-native-rss-parser';
 import HTMLView from 'react-native-htmlview';
+import IoniIcons from "react-native-vector-icons/Ionicons";
 
 export default function RssReader(props) {
 
@@ -50,19 +51,28 @@ export default function RssReader(props) {
   if (!!content.title) {
     return (
       <SafeAreaView style={styles.contentContainer}>
-        <Text style={styles.desc} onPress={() => setContent({})}>
-          Wróć
-        </Text>
-        <Text style={styles.title}>
-          {content.title}
-        </Text>
-        <View style={styles.hr}/>
-
-        <HTMLView stylesheet={htmlStyles}
-                  style={styles.news}
-                  addLineBreaks={false}
-                  value={content.content}
-        />
+        <ScrollView horizontal={false}>
+          <Text style={styles.title}>
+            {content.title}
+          </Text>
+          <View style={styles.hr}/>
+          <HTMLView stylesheet={htmlStyles}
+                    style={styles.news}
+                    addLineBreaks={false}
+                    value={content.content}
+          />
+        </ScrollView>
+        <IoniIcons.Button
+          name="return-up-back"
+          onPress={() => setContent({})}
+          backgroundColor={transparent}
+          underlayColor={transparent}
+          size={50}
+          borderRadius={0}
+          iconStyle={styles.noMargin}
+          color={lpuColor}
+        >Wróć do listy
+        </IoniIcons.Button>
       </SafeAreaView>
     )
   } else {
@@ -96,7 +106,13 @@ export default function RssReader(props) {
 const htmlStyles = StyleSheet.create({
   p: {
     fontSize: 15,
-    color: textColor
+    color: textColor,
+    textAlign: 'justify',
+  },
+  pre: {
+    fontSize: 15,
+    color: textColor,
+    textAlign: 'justify',
   },
   marginBottom: 10,
 });
@@ -112,6 +128,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
+    justifyContent: 'space-between',
   },
   listContainer: {
     height: Dev_Height,

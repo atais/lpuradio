@@ -2,7 +2,7 @@ import React from 'react';
 import TrackPlayer, {usePlaybackState} from 'react-native-track-player';
 import {StyleSheet, View} from 'react-native';
 import IoniIcons from "react-native-vector-icons/Ionicons";
-import {lpuColor} from "./Const";
+import {lpuColor, transparent} from "./Const";
 
 export default function PlayerControls() {
   const state = usePlaybackState();
@@ -15,7 +15,6 @@ export default function PlayerControls() {
   }
 }
 
-const transparent = 'transparent'
 const styles = StyleSheet.create({
   main: {
     flexDirection: 'row',

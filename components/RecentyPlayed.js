@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     height: '25%',
   },
   recent: {
-    fontSize: 15,
+    fontSize: 20,
     color: textColor,
     fontWeight: '700',
     marginBottom: 15,

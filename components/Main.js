@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Dimensions} from 'react-native';
 import {SceneMap, TabView} from 'react-native-tab-view';
 import {initializePlayer} from "./GlobalPlayer";
 import {TopBar} from "./TopBar";
 import LpuRadio from "./LpuRadio";
 import RssReader from "./RssReader";
+import {initialState, reducer, StateProvider} from "./GlobalState";
 
 const initialLayout = {width: Dimensions.get('window').width};
 
@@ -26,12 +27,14 @@ export default function App() {
   });
 
   return (
-    <TabView
-      renderTabBar={TopBar}
-      navigationState={{index, routes}}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={initialLayout}
-    />
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <TabView
+        renderTabBar={TopBar}
+        navigationState={{index, routes}}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={initialLayout}
+      />
+    </StateProvider>
   );
 }

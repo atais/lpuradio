@@ -7,12 +7,13 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
 } from "react-native";
 import {bgColor, bgLighter, Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
 import * as rssParser from 'react-native-rss-parser';
 import HTMLView from 'react-native-htmlview';
 import IoniIcons from "react-native-vector-icons/Ionicons";
+import {WebView} from 'react-native-webview';
 
 export default function RssReader(props) {
 
@@ -40,6 +41,20 @@ export default function RssReader(props) {
     }
   }
 
+  function renderNode(node, index, siblings, parent, defaultRenderer) {
+    if (node.name === 'iframe') {
+      const a = node.attribs;
+      const iframeHtml = `<iframe src="${a.src}"></iframe>`;
+      console.log(node);
+      console.log(iframeHtml);
+      return (
+        <View key={index} style={{width: Number(a.width), height: Number(a.height)}}>
+          <WebView source={{html: iframeHtml}}/>
+        </View>
+      );
+    }
+  }
+
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", bh);
     if (news.length === 0) {
@@ -59,6 +74,7 @@ export default function RssReader(props) {
           <HTMLView stylesheet={htmlStyles}
                     style={styles.news}
                     addLineBreaks={false}
+                    renderNode={renderNode}
                     value={content.content}
           />
         </ScrollView>

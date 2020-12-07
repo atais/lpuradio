@@ -15,6 +15,10 @@ export async function initializePlayer() {
     ],
   });
 
+  await TrackPlayer.addEventListener("remote-play", () => TrackPlayer.play());
+  await TrackPlayer.addEventListener("remote-pause", () => TrackPlayer.pause());
+  await TrackPlayer.addEventListener("remote-stop", () => TrackPlayer.stop());
+
   // Add a track to the queue
   await TrackPlayer.add({
     id: GLOBAL_TRACK_ID,

@@ -21,9 +21,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  noMargin: {
+    marginRight: 0,
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'flex-end',
+    justifyContent: 'space-around',
   },
 });
 
@@ -34,6 +38,8 @@ const stopButton =
     backgroundColor={transparent}
     underlayColor={transparent}
     size={70}
+    borderRadius={0}
+    iconStyle={styles.noMargin}
     color={lpuColor}
   />
 
@@ -43,6 +49,8 @@ const stopButtonBalancer =
     backgroundColor={transparent}
     underlayColor={transparent}
     size={70}
+    borderRadius={0}
+    iconStyle={styles.noMargin}
     color={transparent}
   />
 
@@ -53,6 +61,8 @@ const playButton =
     size={250}
     backgroundColor={transparent}
     underlayColor={transparent}
+    borderRadius={0}
+    iconStyle={styles.noMargin}
     color={lpuColor}
   />
 
@@ -62,6 +72,8 @@ const pauseButton =
     onPress={() => TrackPlayer.pause()}
     backgroundColor={transparent}
     underlayColor={transparent}
+    borderRadius={0}
+    iconStyle={styles.noMargin}
     size={250}
     color={lpuColor}
   />

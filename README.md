@@ -12,7 +12,6 @@ This project is based on:
 To develop this project you should to set up your local environment following by [React Native Official guide](https://reactnative.dev/docs/environment-setup).
 
 You also need to have installed:
-- yarn
 - react-native-cli
 - Android Studio
 - Android SDK 28
@@ -21,5 +20,16 @@ You also need to have installed:
 
 Now you can run this application by typing:
 ```
-$ yarn && yarn android
+npm start
+```
+
+Second terminal:
+```
+npm run android
+```
+
+## Version release
+
+```
+npm version <version> [-m "Custom message"]
 ```

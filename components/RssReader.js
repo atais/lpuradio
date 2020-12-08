@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   BackHandler,
+  Linking,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -62,17 +63,30 @@ export default function RssReader(props) {
                     value={content.content}
           />
         </ScrollView>
-        <IoniIcons.Button
-          name="return-up-back"
-          onPress={() => setContent({})}
-          backgroundColor={transparent}
-          underlayColor={transparent}
-          size={50}
-          borderRadius={0}
-          iconStyle={styles.noMargin}
-          color={lpuColor}
-        >Wróć do listy
-        </IoniIcons.Button>
+        <View style={styles.buttons}>
+          <IoniIcons.Button
+            name="arrow-back"
+            onPress={() => setContent({})}
+            backgroundColor={transparent}
+            underlayColor={transparent}
+            size={30}
+            borderRadius={0}
+            iconStyle={styles.noMargin}
+            color={lpuColor}
+          >Wróć do listy
+          </IoniIcons.Button>
+          <IoniIcons.Button
+            name="open-outline"
+            onPress={() => Linking.openURL(content.id)}
+            backgroundColor={transparent}
+            underlayColor={transparent}
+            size={30}
+            borderRadius={0}
+            iconStyle={styles.noMargin}
+            color={lpuColor}
+          >Zobacz na stronie
+          </IoniIcons.Button>
+        </View>
       </SafeAreaView>
     )
   } else {
@@ -83,7 +97,13 @@ export default function RssReader(props) {
                     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={fetchNews}/>}>
           {
             news.map(el => (
-              <TouchableHighlight key={el.id} onPress={() => setContent(el)}>
+              <TouchableHighlight
+                key={el.id}
+                onPress={() => {
+                  // console.log(el);
+                  setContent(el);
+                }}
+              >
                 <View style={styles.news}>
                   <Text style={styles.title}>
                     {el.title}
@@ -142,6 +162,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 10,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   title: {
     color: textColor,

@@ -1,14 +1,14 @@
 import {StyleSheet} from "react-native";
 import React from "react";
 import Image from 'react-native-scalable-image';
-import {bgColor, Dev_Width, lpuColor} from "./Const";
+import {Dev_Width, lpuColor, transparent} from "./Const";
 import {TabBar} from "react-native-tab-view";
 
 
 export const TopBar = props => (
   <TabBar
     {...props}
-    style={{backgroundColor: bgColor}}
+    style={{backgroundColor: transparent}}
     indicatorStyle={{backgroundColor: lpuColor}}
     renderLabel={({route, focused, color}) => null}
     renderIcon={({route, focused, color}) => {

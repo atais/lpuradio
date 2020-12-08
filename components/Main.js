@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, ImageBackground, StyleSheet} from 'react-native';
 import {SceneMap, TabView} from 'react-native-tab-view';
 import {initializePlayer} from "./GlobalPlayer";
 import {TopBar} from "./TopBar";
@@ -28,13 +28,23 @@ export default function App() {
 
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
-      <TabView
-        renderTabBar={TopBar}
-        navigationState={{index, routes}}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={initialLayout}
-      />
+      <ImageBackground source={require('../assets/radio_bg.png')} style={styles.image}>
+        <TabView
+          renderTabBar={TopBar}
+          navigationState={{index, routes}}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={initialLayout}
+        />
+      </ImageBackground>
     </StateProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+});

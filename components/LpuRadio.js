@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import PlayerControls from "./PlayerControls";
-import {bgColor, Dev_Height, Dev_Width} from "./Const";
+import {Dev_Height, Dev_Width, transparent} from "./Const";
 import {RdsService} from "./RdsService";
 import NowPlaying from "./NowPlaying";
 import RecentlyPlayed from "./RecentyPlayed";
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     width: Dev_Width,
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: transparent,
     alignContent: 'space-between',
     justifyContent: 'space-between',
-    backgroundColor: bgColor,
-    padding: 20
-  }
+    padding: 20,
+  },
 });

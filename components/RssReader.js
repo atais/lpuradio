@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
   View
 } from "react-native";
-import {bgColor, bgLighter, Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
+import {bgLighter, Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
 import * as rssParser from 'react-native-rss-parser';
 import HTMLView from 'react-native-htmlview';
 import IoniIcons from "react-native-vector-icons/Ionicons";
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     width: Dev_Width,
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: bgColor,
+    backgroundColor: transparent,
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignContent: 'space-between',
     justifyContent: 'space-between',
-    backgroundColor: bgColor,
+    backgroundColor: transparent,
     paddingTop: 10,
     paddingLeft: 10,
     paddingRight: 10,

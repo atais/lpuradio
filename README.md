@@ -28,6 +28,12 @@ Second terminal:
 npm run android
 ```
 
+## Build apk
+
+```
+./build-apk.sh
+```
+
 ## Version release
 
 ```

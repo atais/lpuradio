@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
   BackHandler,
-  Linking,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -10,10 +9,8 @@ import {
   TouchableHighlight,
   View,
 } from "react-native";
-import {bgLighter, Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
+import {Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
 import * as rssParser from 'react-native-rss-parser';
-import HTMLView from 'react-native-htmlview';
-import IoniIcons from "react-native-vector-icons/Ionicons";
 import Image from 'react-native-scalable-image';
 import NewsItem from "./NewsItem";
 

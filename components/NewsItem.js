@@ -1,7 +1,7 @@
 import {Linking, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 import React from "react";
 import Image from "react-native-scalable-image";
-import {Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
+import {Dev_Width, lpuColor, textColor, transparent} from "./Const";
 import HTMLView from "react-native-htmlview";
 import IoniIcons from "react-native-vector-icons/Ionicons";
 

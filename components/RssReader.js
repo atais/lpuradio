@@ -1,19 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {
   BackHandler,
-  Linking,
   RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
 } from "react-native";
-import {bgLighter, Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
+import {Dev_Height, Dev_Width, lpuColor, textColor, transparent} from "./Const";
 import * as rssParser from 'react-native-rss-parser';
-import HTMLView from 'react-native-htmlview';
-import IoniIcons from "react-native-vector-icons/Ionicons";
+import Image from 'react-native-scalable-image';
+import NewsItem from "./NewsItem";
 
 export default function RssReader(props) {
 
@@ -21,13 +20,27 @@ export default function RssReader(props) {
   const [refreshing, setRefreshing] = useState(false);
   const [content, setContent] = useState({});
 
+  const minRes = '-390x220'
+
   async function fetchNews() {
     setRefreshing(true);
     await fetch('https://lpu24.pl/feed/')
       .then((response) => response.text())
       .then((responseData) => rssParser.parse(responseData))
       .then((rss) => {
-        setNews(rss.items);
+        const withImages = rss.items.map((it) => {
+          const url = it.enclosures[0].url;
+          const lastDot = url.lastIndexOf('.');
+          const ext = url.substr(lastDot);
+          const file = url.substr(0, lastDot);
+          return {
+            ...it,
+            smallImg: {uri: file + minRes + ext},
+            bigImg: {uri: url},
+          }
+        })
+
+        setNews(withImages);
         return setRefreshing(false);
       })
   }
@@ -49,69 +62,40 @@ export default function RssReader(props) {
     return () => BackHandler.removeEventListener("hardwareBackPress", bh);
   }, [content]);
 
+  function Divider(props) {
+    if (props.idx === news.length - 1) {
+      return (<View/>)
+    } else {
+      return (<View style={styles.hr}/>)
+    }
+  }
+
+
   if (!!content.title) {
     return (
-      <SafeAreaView style={styles.contentContainer}>
-        <ScrollView horizontal={false}>
-          <Text style={styles.title}>
-            {content.title}
-          </Text>
-          <View style={styles.hr}/>
-          <HTMLView stylesheet={htmlStyles}
-                    style={styles.news}
-                    addLineBreaks={false}
-                    value={content.content}
-          />
-        </ScrollView>
-        <View style={styles.buttons}>
-          <IoniIcons.Button
-            name="arrow-back"
-            onPress={() => setContent({})}
-            backgroundColor={transparent}
-            underlayColor={transparent}
-            size={30}
-            borderRadius={0}
-            iconStyle={styles.noMargin}
-            color={lpuColor}
-          >Wróć do listy
-          </IoniIcons.Button>
-          <IoniIcons.Button
-            name="open-outline"
-            onPress={() => Linking.openURL(content.id)}
-            backgroundColor={transparent}
-            underlayColor={transparent}
-            size={30}
-            borderRadius={0}
-            iconStyle={styles.noMargin}
-            color={lpuColor}
-          >Zobacz na stronie
-          </IoniIcons.Button>
-        </View>
-      </SafeAreaView>
+      <NewsItem content={content} setContentFn={setContent}/>
     )
   } else {
     return (
       <SafeAreaView style={styles.listContainer}>
-        <ScrollView style={styles.scrollView}
-                    horizontal={false}
+        <ScrollView horizontal={false}
                     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={fetchNews}/>}>
           {
-            news.map(el => (
-              <TouchableHighlight
-                key={el.id}
-                onPress={() => {
-                  // console.log(el);
-                  setContent(el);
-                }}
-              >
-                <View style={styles.news}>
-                  <Text style={styles.title}>
-                    {el.title}
-                  </Text>
-                  <Text style={styles.desc}>
-                    {el.description}
-                  </Text>
-                  <View style={styles.hr}/>
+            news.map((el, idx) => (
+              <TouchableHighlight key={el.id} onPress={() => setContent(el)}>
+                <View>
+                  <View style={styles.news}>
+                    <View style={styles.newsRow}>
+                      <Image width={(Dev_Width - 20) * 0.3} source={el.smallImg}/>
+                      <Text style={styles.title}>
+                        {el.title}
+                      </Text>
+                    </View>
+                    <Text style={styles.desc}>
+                      {el.description}
+                    </Text>
+                  </View>
+                  <Divider idx={idx}/>
                 </View>
               </TouchableHighlight>
             ))
@@ -122,34 +106,7 @@ export default function RssReader(props) {
   }
 }
 
-
-const htmlStyles = StyleSheet.create({
-  p: {
-    fontSize: 15,
-    color: textColor,
-    textAlign: 'justify',
-  },
-  pre: {
-    fontSize: 15,
-    color: textColor,
-    textAlign: 'justify',
-  },
-  marginBottom: 10,
-});
-
 const styles = StyleSheet.create({
-  contentContainer: {
-    height: Dev_Height,
-    width: Dev_Width,
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: transparent,
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    justifyContent: 'space-between',
-  },
   listContainer: {
     height: Dev_Height,
     width: Dev_Width,
@@ -158,35 +115,33 @@ const styles = StyleSheet.create({
     alignContent: 'space-between',
     justifyContent: 'space-between',
     backgroundColor: transparent,
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   title: {
     color: textColor,
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: '500',
-    marginBottom: 5,
+    marginLeft: 10,
+    width: (Dev_Width - 30) * 0.7,
   },
   desc: {
+    marginTop: 10,
     textAlign: 'justify',
-    fontSize: 15,
     color: textColor,
-    marginBottom: 10,
   },
   news: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 15,
     marginTop: 15,
   },
+  newsRow: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   hr: {
-    marginTop: 15,
     marginLeft: 50,
     marginRight: 50,
-    borderBottomColor: bgLighter,
+    borderBottomColor: lpuColor,
     borderBottomWidth: 1,
   }
 });

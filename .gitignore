@@ -23,11 +23,13 @@ DerivedData
 
 # Android/IntelliJ
 #
-build/
+build/detail
 .idea
 .gradle
 local.properties
 *.iml
+*.aab
+*.apk
 
 # node.js
 #
